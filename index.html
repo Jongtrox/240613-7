@@ -5,191 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moving Alien and Solar System</title>
     <style>
-        /* 페이지 전체의 기본 설정을 정의 */
         body, html {
-            margin: 0; /* 모든 기본 여백 제거 */
-            padding: 0; /* 모든 기본 패딩 제거 */
-            overflow: hidden; /* 스크롤 바를 숨김 */
-            height: 100%; /* 페이지 높이를 100%로 설정 */
-            width: 100%; /* 페이지 너비를 100%로 설정 */
-            background: black; /* 배경색을 검정으로 설정 */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background: black;
         }
 
-        /* 별 필드를 정의 */
         .star-field {
             position: absolute;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: 0; /* 가장 뒤에 배치 */
+            z-index: 0;
         }
 
-        /* 별의 스타일 정의 */
         .star {
             position: absolute;
-            border-radius: 50%; /* 별을 둥글게 */
-            background: white; /* 별의 색상을 흰색으로 */
-            opacity: 0.8; /* 반투명 설정 */
-            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8); /* 별 주위에 빛 효과 추가 */
-            animation: twinkle 2s infinite ease-in-out; /* 반짝이는 애니메이션 추가 */
+            border-radius: 50%;
+            background: white;
+            opacity: 0.8;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            animation: twinkle 2s infinite ease-in-out;
         }
 
-        /* 별이 반짝이는 애니메이션 */
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; } /* 시작과 끝에서 불투명도 0.3 */
-            50% { opacity: 1; } /* 중간에서 불투명도 1 */
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
-        /* 태양의 스타일 정의 */
         .sun {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* 태양을 화면 중앙에 배치 */
-            width: 80px; /* 태양의 너비 설정 */
-            height: 80px; /* 태양의 높이 설정 */
-            background-color: #FFD700; /* 태양의 색상 설정 */
-            border-radius: 50%; /* 태양을 둥글게 */
-            box-shadow: 0 0 100px #FFD700; /* 태양 주위에 빛 효과 추가 */
-            z-index: 1; /* 태양을 별 위에 배치 */
+            transform: translate(-50%, -50%);
+            width: 100px; /* 태양의 크기 */
+            height: 100px;
+            background-color: #FFD700; /* 태양 색상 */
+            border-radius: 50%;
+            box-shadow: 0 0 50px #FFD700; /* 태양 광휘 효과 */
+            z-index: 1;
         }
 
-        /* 행성, 위성의 스타일 정의 */
         .planet, .planet2, .moon {
             position: absolute;
             top: 50%;
             left: 50%;
-            border-radius: 50%; /* 둥글게 */
-            z-index: 1; /* 태양 위에 배치 */
-            animation-timing-function: linear; /* 애니메이션을 선형으로 설정 */
+            border-radius: 50%;
+            z-index: 1;
+            animation-timing-function: linear;
         }
 
-        /* 행성의 스타일과 애니메이션 정의 */
         .planet {
-            position: absolute;
-            top: 48.5%;
-            left: 38.5%; /* 행성의 초기 위치를 가운데로 설정 */
-            width: 16px; /* 행성의 너비 */
-            height: 16px; /* 행성의 높이 */
-            background-color: #7F8C8D; /* 행성의 색상 */
-            transform-origin: 80px 50%; /* 회전 중심 설정 */
-            animation: orbit1 10s linear infinite; /* 회전 애니메이션 설정 */
+            width: 20px; /* 행성의 크기 */
+            height: 20px;
+            background-color: #7F8C8D; /* 행성 색상 */
+            transform-origin: 80px 50%;
+            animation: orbit1 10s linear infinite;
         }
 
-        /* 두 번째 행성의 스타일과 애니메이션 정의 */
         .planet2 {
-            position: absolute;
-            top: 48.5%;
-            left: 31.5%; /* 행성의 초기 위치를 가운데로 설정 */
-            width: 25px; /* 행성의 너비 */
-            height: 25px; /* 행성의 높이 */
-            background-color: blue; /* 행성의 색상 */
-            transform-origin: 130px 50%; /* 회전 중심 설정 */
-            animation: orbit2 13s linear infinite; /* 회전 애니메이션 설정 */
+            width: 30px; /* 행성의 크기 */
+            height: 30px;
+            background-color: blue; /* 행성 색상 */
+            transform-origin: 130px 50%;
+            animation: orbit2 13s linear infinite;
         }
 
-        /* 위성의 스타일과 애니메이션 정의 */
         .moon {
-            position: absolute;
-            top: 48.5%;
-            left: 23.5%; /* 행성의 초기 위치를 가운데로 설정 */
-            width: 10px; /* 위성의 너비 */
-            height: 10px; /* 위성의 높이 */
-            background-color: #D3D3D3; /* 위성의 색상 */
-            transform-origin: 180px 50%; /* 회전 중심 설정 */
-            animation: orbit3 5s linear infinite; /* 회전 애니메이션 설정 */
+            width: 10px; /* 위성의 크기 */
+            height: 10px;
+            background-color: #D3D3D3; /* 위성 색상 */
+            transform-origin: 180px 50%;
+            animation: orbit3 5s linear infinite;
         }
 
-        /* 행성의 회전 애니메이션 정의 */
         @keyframes orbit1 {
-            from { transform: rotate(0deg); } /* 시작 지점 */
-            to { transform: rotate(360deg); } /* 끝 지점 */
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* 두 번째 행성의 회전 애니메이션 정의 */
         @keyframes orbit2 {
-            from { transform: rotate(0deg); } /* 시작 지점 */
-            to { transform: rotate(360deg); } /* 끝 지점 */
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* 위성의 회전 애니메이션 정의 */
         @keyframes orbit3 {
-            from { transform: rotate(0deg); } /* 시작 지점 */
-            to { transform: rotate(360deg); } /* 끝 지점 */
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* UFO의 스타일 정의 */
         .ufo {
             position: absolute;
-            width: 80px; /* UFO의 너비 */
-            height: 40px; /* UFO의 높이 */
-            background: radial-gradient(circle at 50% 50%, gray, darkgray); /* UFO의 색상 그라데이션 */
-            border-radius: 50%; /* 둥글게 */
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8); /* 빛 효과 추가 */
+            width: 80px;
+            height: 40px;
+            background: radial-gradient(circle at 50% 50%, gray, darkgray);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
         }
 
-        /* UFO의 윗 부분 스타일 정의 */
         .ufo::before {
-            content: ''; /* 내용 없음 */
+            content: '';
             position: absolute;
             top: 5px;
             left: 20px;
-            width: 40px; /* 너비 */
-            height: 15px; /* 높이 */
-            background: radial-gradient(circle at 50% 50%, gray, darkgray); /* 색상 그라데이션 */
-            border-radius: 50%; /* 둥글게 */
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.8); /* 빛 효과 추가 */
+            width: 40px;
+            height: 15px;
+            background: radial-gradient(circle at 50% 50%, gray, darkgray);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
         }
 
-        /* UFO의 회전 애니메이션 정의 */
         .ufo-container {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 0;
             height: 0;
-            transform: translate(-50%, -50%); /* 중앙에 배치 */
-            animation: ellipticalOrbit 15s linear infinite; /* 회전 애니메이션 설정 */
+            transform: translate(-50%, -50%);
+            animation: ellipticalOrbit 15s linear infinite;
             z-index: 1;
         }
 
-        /* UFO의 타원형 궤도 애니메이션 정의 */
         @keyframes ellipticalOrbit {
             from {
-                transform: rotate(0deg) translateX(300px) rotate(0deg); /* 시작 지점 */
+                transform: rotate(0deg) translateX(300px) rotate(0deg);
             }
             to {
-                transform: rotate(360deg) translateX(300px) rotate(-360deg); /* 끝 지점 */
+                transform: rotate(360deg) translateX(300px) rotate(-360deg);
             }
         }
 
-        /* 캔버스 스타일 정의 */
         canvas {
             position: absolute;
             z-index: 2;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* 중앙에 배치 */
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
 <body>
-    <!-- 별 배경을 위한 컨테이너 -->
     <div class="star-field" id="star-field"></div>
-    <!-- 태양을 표현하는 요소 -->
     <div class="sun"></div>
-    <!-- 행성을 표현하는 요소 -->
     <div class="planet"></div>
-    <!-- 위성을 표현하는 요소 -->
     <div class="moon"></div>
-    <!-- 두 번째 행성을 표현하는 요소 -->
     <div class="planet2"></div>
-    <!-- UFO 컨테이너 -->
     <div class="ufo-container">
-        <!-- UFO 자체 -->
         <div class="ufo"></div>
     </div>
-    <!-- 애니메이션 및 도형을 그리기 위한 캔버스 -->
     <canvas id="spaceCanvas" width="400" height="400"></canvas>
 
     <script>
@@ -197,18 +163,219 @@
             const starField = document.getElementById('star-field');
             const starCount = 1000;
 
-            // 별을 생성하는 루프
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
-                star.style.width = `${2 + Math.random() * 4}px`; /* 별의 너비를 랜덤으로 설정 */
-                star.style.height = star.style.width; /* 높이도 같은 값으로 설정 */
-                star.style.top = `${Math.random() * window.innerHeight}px`; /* 별의 위치를 랜덤으로 설정 */
-                star.style.left = `${Math.random() * window.innerWidth}px`; /* 별의 위치를 랜덤으로 설정 */
-                star.style.animationDuration = `${2 + Math.random() * 3}s`; /* 애니메이션 지속시간을 랜덤으로 설정 */
-                starField.appendChild(star); /* 별을 starField에 추가 */
+                star.style.width = `${2 + Math.random() * 4}px`;
+                star.style.height = star.style.width;
+                star.style.top = `${Math.random() * window.innerHeight}px`;
+                star.style.left = `${Math.random() * window.innerWidth}px`;
+                star.style.animationDuration = `${2 + Math.random() * 3}s`;
+                starField.appendChild(star);
             }
         });
 
         const canvas = document.getElementById('spaceCanvas');
-       
+        const ctx = canvas.getContext('2d');
+
+        // Colors
+        const BLACK = '#000';
+        const WHITE = '#fff';
+        const GREEN = '#0f0';
+        const GRAY = '#888';
+
+        // Star class
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 1.5;
+                this.alpha = Math.random();
+                this.alphaChange = 0.02;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                ctx.fill();
+            }
+
+            update() {
+                this.alpha += this.alphaChange;
+                if (this.alpha > 1 || this.alpha < 0) {
+                    this.alphaChange *= -1;
+                }
+            }
+        }
+
+        // UFO class
+        class UFO {
+            constructor() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height / 2;
+                this.size = 100;
+                this.speed = 3;
+                this.moveX = 0;
+                this.moveY = 0;
+                this.rotation = 0;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+
+                // UFO body
+                ctx.fillStyle = GRAY;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // UFO window
+                ctx.fillStyle = GREEN;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size / 2, this.size / 4, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            }
+
+            update() {
+                this.x += this.moveX * this.speed;
+                this.y += this.moveY * this.speed;
+
+                // Keep UFO within canvas bounds
+                this.x = Math.max(this.size / 2, Math.min(this.x, canvas.width - this.size / 2));
+                this.y = Math.max(this.size / 2, Math.min(this.y, canvas.height - this.size / 2));
+
+                // Rotate UFO based on movement direction
+                if (this.moveX !== 0 || this.moveY !== 0) {
+                    this.rotation = Math.atan2(this.moveY, this.moveX);
+                }
+            }
+        }
+
+        // Alien class
+        class Alien {
+            constructor() {
+                this.baseSize = 30;
+                this.size = this.baseSize;
+                this.speed = 3;
+                this.eyeOpen = true;
+                this.blinkInterval = Math.random() * 2000 + 1000; // 1-3 seconds
+                this.antennaDegree = 0;
+                this.pulseDirection = 1;
+                this.lastBlink = 0;
+            }
+
+            draw(x, y) {
+                this.x = x;
+                this.y = y;
+
+                // Pulsating body
+                ctx.fillStyle = GREEN;
+                ctx.beginPath();
+                ctx.ellipse(this.x, this.y, this.size / 2, this.size / 1.5, 0, 0, Math.PI * 2);
+                           // Blinking eyes
+            if (this.eyeOpen) {
+                ctx.fillStyle = WHITE;
+                ctx.beginPath();
+                ctx.arc(this.x - this.size / 4, this.y - this.size / 4, this.size / 8, 0, Math.PI * 2);
+                ctx.arc(this.x + this.size / 4, this.y - this.size / 4, this.size / 8, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Wobbling antenna
+            ctx.save();
+            ctx.translate(this.x, this.y - this.size / 2);
+            ctx.rotate(Math.sin(this.antennaDegree) * 0.2);
+            ctx.strokeStyle = GREEN;
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -this.size / 2);
+            ctx.stroke();
+
+            ctx.fillStyle = GREEN;
+            ctx.beginPath();
+            ctx.arc(0, -this.size / 2, this.size / 10, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        update(deltaTime) {
+            // Blink eyes
+            if (deltaTime - this.lastBlink > this.blinkInterval) {
+                this.eyeOpen = !this.eyeOpen;
+                this.lastBlink = deltaTime;
+                this.blinkInterval = Math.random() * 2000 + 1000;
+            }
+
+            // Wobble antenna
+            this.antennaDegree += 0.05;
+
+            // Pulsate body
+            this.size += 0.1 * this.pulseDirection;
+            if (this.size > this.baseSize + 5 || this.size < this.baseSize - 5) {
+                this.pulseDirection *= -1;
+            }
+        }
+    }
+
+    // Create objects
+    const stars = Array.from({ length: 100 }, () => new Star());
+    const ufo = new UFO();
+    const alien = new Alien();
+
+    // Handle key events
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            ufo.moveX = -1;
+        }
+        if (e.key === 'ArrowRight') {
+            ufo.moveX = 1;
+        }
+        if (e.key === 'ArrowUp') {
+            ufo.moveY = -1;
+        }
+        if (e.key === 'ArrowDown') {
+            ufo.moveY = 1;
+        }
+    });
+
+    document.addEventListener('keyup', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            ufo.moveX = 0;
+        }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            ufo.moveY = 0;
+        }
+    });
+
+    // Animation loop
+    let lastTime = 0;
+    function animate(currentTime) {
+        const deltaTime = currentTime - lastTime;
+        lastTime = currentTime;
+
+        ctx.fillStyle = BLACK;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        stars.forEach(star => {
+            star.draw();
+            star.update();
+        });
+
+        ufo.update();
+        ufo.draw();
+
+        // Draw alien on top of the UFO
+        alien.update(deltaTime);
+        alien.draw(ufo.x, ufo.y - ufo.size / 2);
+
+        requestAnimationFrame(animate);
+    }
+
+    animate(0);
+</script>
